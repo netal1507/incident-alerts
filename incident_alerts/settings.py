@@ -156,3 +156,6 @@ MEDIA_ROOT = BASE_DIR / "media"
 # YouTube API
 YOUTUBE_API_KEY = "AIzaSyB70YfQhkdcuX5OSwEDDlqhYeTLThBjvlY"
 YOUTUBE_CHANNEL_ID = "UCqdWIh-42E1KU4njz4b-O3Q"
+
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

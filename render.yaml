@@ -2,16 +2,10 @@ services:
   - type: web
     name: incident-alerts
     env: python
-    plan: free
-    buildCommand: |
-      pip install -r requirements.txt
-      python manage.py collectstatic --noinput
-      python manage.py migrate
-    startCommand: gunicorn incident_alerts.wsgi:application
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn incident_alerts.wsgi:application"
     envVars:
       - key: DJANGO_SECRET_KEY
         generateValue: true
-      - key: DJANGO_DEBUG
+      - key: DEBUG
         value: "False"
-      - key: YOUTUBE_API_KEY
-        sync: false
