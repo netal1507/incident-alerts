@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ incident.title }}</title>
+</head>
+<body>
+    <style>
+        header {
+    background: #111;
+    color: white;
+    padding: 15px 20px;
+    position: sticky; /* Makes it stick */
+    top: 0;           /* Stick to top */
+    z-index: 1000;    /* Stay above other content */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* Optional: adds shadow */
+}
+header .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+        /* HEADER BAR */
+.header-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-icon {
+    position: absolute;
+    left: 20px;
+    font-size: 26px;
+    cursor: pointer;
+}
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 240px;
+    height: 100%;
+    background: #111;
+    padding-top: 80px;
+    transition: 0.3s ease;
+    z-index: 999;
+}
+
+.side-menu.open {
+    left: 0;
+}
+
+.side-menu a:hover,
+.side-menu a.active {
+    background: rgb(255, 0, 106);
+    color: white;
+}
+
+        .incident-card {
+           display: flex;
+           background: white;
+           margin: 30px 0;
+           border-radius: 25px;
+           overflow: hidden;
+        }
+
+        .incident-image {
+           width: 50%;
+        }
+
+        .incident-image img {
+           width: 100%;
+           height: 100%;
+           object-fit: cover;
+        }
+
+.incident-content {
+    width: 50%;
+    padding: 15px;
+}
+
+@media (max-width: 600px) {
+    .incident-card {
+        flex-direction: column;
+    }
+}
+</style>
+<header>
+    <div class="container header-bar">
+        <!--<div class="menu-icon" onclick="toggleMenu()">☰ Menu</div> -->
+        <h1>🚨 Incident Alerts</h1>
+    </div>
+</header>
+<div style="margin:15px 0;">
+        <a href="/" style="
+            display:inline-block;
+            padding:8px 14px;
+            background:#111;
+            color:rgb(233, 3, 80);
+            border-radius:20px;
+            text-decoration:none;
+            font-size:14px;
+        ">
+            ⬅ Back to Home
+        </a>
+    </div>
+<!--<a href="/">⬅ Back to Home</a>-->
+
+<h1>{{ incident.title }}</h1>
+<p>{{ incident.description }}</p>
+<p><small>{{ incident.created_at }}</small></p>
+
+
+<br><br>
+<!--<a href="/">⬅ Back to Home</a> -->
+
+
+</body>
+</html>

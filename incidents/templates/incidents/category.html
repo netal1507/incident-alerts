@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ category.name }} | Incident Alerts</title>
+</head>
+
+<body>
+    <style>
+        header {
+    background: #111;
+    color: white;
+    padding: 15px 20px;
+    position: sticky; /* Makes it stick */
+    top: 0;           /* Stick to top */
+    z-index: 1000;    /* Stay above other content */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* Optional: adds shadow */
+}
+header .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+        /* HEADER BAR */
+.header-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-icon {
+    position: absolute;
+    left: 20px;
+    font-size: 26px;
+    cursor: pointer;
+}
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 240px;
+    height: 100%;
+    background: #111;
+    padding-top: 80px;
+    transition: 0.3s ease;
+    z-index: 999;
+}
+
+.side-menu.open {
+    left: 0;
+}
+
+.side-menu a:hover,
+.side-menu a.active {
+    background: rgb(255, 0, 106);
+    color: white;
+}
+
+        .incident-card {
+           display: flex;
+           background: white;
+           margin: 30px 0;
+           border-radius: 25px;
+           overflow: hidden;
+        }
+
+        .incident-image {
+           width: 50%;
+        }
+
+        .incident-image img {
+           width: 100%;
+           height: 100%;
+           object-fit: cover;
+        }
+
+.incident-content {
+    width: 50%;
+    padding: 15px;
+}
+
+@media (max-width: 600px) {
+    .incident-card {
+        flex-direction: column;
+    }
+}
+</style>
+<header>
+    <div class="container header-bar">
+        <!--<div class="menu-icon" onclick="toggleMenu()">☰ Menu</div> -->
+        <h1>🚨 Incident Alerts</h1>
+    </div>
+</header>
+
+   <div class="container">
+
+    <!-- BACK BUTTON -->
+    <div style="margin:15px 0;">
+        <a href="/" style="
+            display:inline-block;
+            padding:8px 14px;
+            background:#111;
+            color:rgb(233, 3, 80);
+            border-radius:20px;
+            text-decoration:none;
+            font-size:14px;
+        ">
+            ⬅ Back to Home
+        </a>
+    </div>
+
+    <!-- PAGE TITLE -->
+    <h2 style="margin-bottom:20px;background: rgb(12, 12, 12);color: rgb(233, 3, 80);">
+        🗂 {{ category.name }} Incidents
+    </h2>
+
+    <!-- INCIDENT LIST -->
+    {% for incident in incidents %}
+<div class="incident-card">
+
+    <div class="incident-image">
+        {% if incident.image %}
+            <img src="{{ incident.image.url }}" alt="{{ incident.title }}">
+        {% else %}
+            <img src="/static/images/placeholder.jpg">
+        {% endif %}
+    </div>
+
+    <div class="incident-content">
+        <h3>
+            <a href="{% url 'incident_detail' incident.slug %}">
+                {{ incident.title }}
+            </a>
+        </h3>
+
+        <p>{{ incident.description|truncatechars:140 }}</p>
+        <small>{{ incident.created_at|date:"d M Y, h:i A" }}</small>
+    </div>
+
+</div>
+{% empty %}
+<p>No incidents in this category.</p>
+{% endfor %}
+
+</div>
+
+
+</body>
+</html>
